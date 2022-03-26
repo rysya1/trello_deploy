@@ -1,15 +1,20 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const ModalFormWindow = (props) => {
 	return (
 		<>
-			<Backdrop onClick={props.onConfirm}/>
+			<Link to='/dashboard'>
+				<Backdrop />
+			</Link>
 			<Modal>
-                <ImgCont >
-				<Img onClick={props.onConfirm} src='https://cdn-icons.flaticon.com/png/128/3482/premium/3482248.png?token=exp=1647257474~hmac=3a49b91fd74cd3c1329e49bd93b8ae7b' />
-				</ImgCont>
-                <div>
-					<ImgModal 
+				<Link to='/dashboard'>
+					<ImgCont>
+						<Img src='https://cdn-icons.flaticon.com/png/128/3482/premium/3482248.png?token=exp=1647257474~hmac=3a49b91fd74cd3c1329e49bd93b8ae7b' />
+					</ImgCont>
+				</Link>
+				<div>
+					<ImgModal
 						src='https://static.thenounproject.com/png/767489-200.png'
 						alt=''
 					/>
@@ -38,7 +43,7 @@ const Backdrop = styled.div`
 	width: 100%;
 	height: 100vh;
 	z-index: 10;
-	background: rgba(0, 0, 0, 0.527);
+	background: rgba(0, 0, 0, 0.206);
 `
 const Modal = styled.div`
 	border-radius: 5px;
@@ -102,12 +107,12 @@ const TextArea = styled.textarea`
 	color: #0079bf;
 `
 const Img = styled.img`
-    width: 40px;
+	width: 40px;
 `
 const ImgCont = styled.span`
-    display: flex;
-    justify-content: flex-end;
-    padding: 0;
-    margin: 0;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0;
+	margin: 0;
 `
 export default ModalFormWindow

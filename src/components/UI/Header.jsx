@@ -46,12 +46,17 @@ const Trello = styled.div`
 const HeaderDiv = styled.div`
 	height: 50px;
 	margin: 0 auto;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    	'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    	sans-serif;
+  		-webkit-font-smoothing: antialiased;
+  		-moz-osx-font-smoothing: grayscale;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	background: #565958;
+	background: #026aa7;
 	.block_for_icon_and_ul {
-		width: 1000px;
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -73,7 +78,7 @@ const Button = styled.button`
 	margin-top: 5px;
 	width: 75px;
 	height: 42px;
-	background: #787a79;
+	background: #014a75;
 	color: #ffffff;
 	border-radius: 6px;
 	border: none;
@@ -83,11 +88,11 @@ const Button = styled.button`
 `
 const Search = styled.div`
 	display: flex;
-	background: #787a79;
+	background: #3588b9;
 	width: 160px;
 	height: 34px;
 	border-radius: 6px;
-	padding: 2px;
+	padding: px;
 	input {
 		background: none;
 		border: none;

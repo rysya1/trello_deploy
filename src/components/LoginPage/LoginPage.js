@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled, { keyframes, createGlobalStyle } from 'styled-components'
 import useInput from '../../Hooks/useInput'
 import { authActions } from '../../store/auth-slice'
-
+import { useCallbackPrompt } from '../../Hooks/useCallbackPrompt'
+import DialogBox from '../DialogBox/DialogBox'
 function LoginPage(props) {
+	const [showDialog, setShowDialog] = useState(false)
+	const [state, setState] = useState('')
+	const [showPrompt, confirmNavigation, cancelNavigation] =
+		useCallbackPrompt(showDialog)
+
 	const { isAuth, errorMessage, account } = useSelector((state) => state.auth)
-	console.log(isAuth)
-	console.log(errorMessage)
-	console.log(account)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const userEmail = useInput()
@@ -25,7 +28,15 @@ function LoginPage(props) {
 	if (userPassword.valueInputIsInValid) {
 		error.password = 'Введите пароль'
 	}
-
+	useEffect(() => {
+		if (
+			userEmail.value.trim().length > 0 ||
+			userPassword.value.trim().length > 0
+		) {
+			setShowDialog(true)
+			console.log('dasdas')
+		}
+	}, [userEmail, userPassword, setShowDialog])
 	const handleSubmit = (e) => {
 		e.preventDefault()
 
@@ -37,11 +48,14 @@ function LoginPage(props) {
 		)
 		userEmail.onClear()
 		userPassword.onClear()
+		setShowDialog(true)
 	}
 
-	if (isAuth === true) {
-		navigate('/AddingCard')
-	}
+	useEffect(() => {
+		if (isAuth === true) {
+			navigate('/dashboard')
+		}
+	}, [isAuth])
 
 	let formIsValid = false
 	if (userEmail.valueIsValid && userPassword.valueIsValid) {
@@ -50,6 +64,22 @@ function LoginPage(props) {
 	return (
 		<>
 			<GlobalStyle />
+			{showPrompt && (
+				<DialogBox
+					showDialog={showPrompt}
+					confirmNavigation={confirmNavigation}
+					cancelNavigation={cancelNavigation}
+				/>
+			)}
+			<Link to='/main'>
+				<Button onClick={() => setShowDialog(true)}>
+					<span>Выйти</span>
+					<svg width='15px' height='10px' viewBox='0 0 13 10'>
+						<path d='M1,5 L11,5'></path>
+						<polyline points='8 1 12 5 8 9'></polyline>
+					</svg>
+				</Button>
+			</Link>
 			<Wrapper>
 				<Form>
 					<Img

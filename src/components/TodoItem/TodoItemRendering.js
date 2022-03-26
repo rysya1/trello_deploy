@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import ModalFormWindow from '../ModalWindow/ModalWindowForm'
 import { useState } from 'react'
+
+import { Link, Outlet } from 'react-router-dom'
 const TextStyled = styled.div`
 	margin-top: 10px;
 	display: flex;
@@ -18,16 +20,14 @@ const TextStyled = styled.div`
 `
 const Span = styled.span``
 const TodoItemRendering = (props) => {
-	const [modal, setModal] = useState(false)
-    const toggleUsersHandler = () => {
-		setModal((curState) => !curState)
-	}
 	return (
 		<>
-			{modal && <ModalFormWindow onConfirm={toggleUsersHandler} />}
-			{!modal && <TextStyled onClick={toggleUsersHandler}>
-				<Span >{props.text}</Span>
-			</TextStyled>}
+			<Link to='description'>
+				<TextStyled>
+					<Span>{props.text}</Span>
+				</TextStyled>
+			</Link>
+			<Outlet />
 		</>
 	)
 }
